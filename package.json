@@ -1,0 +1,46 @@
+{
+  "name": "pi-task-timing",
+  "version": "0.1.0",
+  "description": "A Pi extension for task elapsed time, tool execution timing, and richer session-tree inspection.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Jinrui Jia",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Steam086/pi-task-timing.git"
+  },
+  "homepage": "https://github.com/Steam086/pi-task-timing#readme",
+  "bugs": {
+    "url": "https://github.com/Steam086/pi-task-timing/issues"
+  },
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "task-timing",
+    "tool-timing",
+    "developer-tools"
+  ],
+  "files": [
+    "extensions/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "pi --no-extensions -e . --list-models",
+    "typecheck": "tsc --noEmit"
+  },
+  "pi": {
+    "extensions": [
+      "./extensions/task-timing.ts"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "0.84.3",
+    "@earendil-works/pi-tui": "0.84.3",
+    "typescript": "^5.9.2"
+  }
+}
