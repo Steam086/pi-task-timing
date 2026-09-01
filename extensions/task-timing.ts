@@ -1315,10 +1315,22 @@ export default function taskTimingExtension(pi: ExtensionAPI) {
 		restoreTuiFocusPatch = undefined;
 	});
 
-	pi.on("input", () => {
-		// The next agent_start confirms that this input became an agent request.
-		// Replacing this value on every idle input avoids stale timestamps from built-in commands.
-		if (taskStartedAt === undefined) pendingRequestAt = Date.now();
+	pi.on("input", (event, ctx) => {
+		const inputAt = Date.now();
+		if (event.streamingBehavior === undefined) {
+			// The next agent_start confirms that this idle input became an agent request.
+			// Replacing this value avoids stale timestamps when prompt validation fails.
+			pendingRequestAt = inputAt;
+			return;
+		}
+
+		// Steering and follow-up messages belong to the current run but establish a
+		// new user/assistant interval. Measure the eventual summary from the latest
+		// user input, not from the prompt that originally started the run.
+		pendingRequestAt = undefined;
+		taskStartedAt = inputAt;
+		taskToolCount = 0;
+		updateWorkingMessage(ctx);
 	});
 
 	pi.on("agent_start", (_event, ctx) => {

@@ -4,8 +4,8 @@ A [Pi](https://github.com/earendil-works/pi-mono) extension that records task an
 
 ## Features
 
-- Shows a live elapsed-time counter while Pi is working.
-- Adds a persistent summary after each settled task, including total duration and tool count.
+- Shows a live elapsed-time counter while Pi is working, measured from the latest user input.
+- Adds a persistent summary after each settled assistant response, measured from the latest user input and including the tool count for that interval.
 - Records precise start time, end time, duration, and success/error state for tool executions.
 - Adds `/tool-times`, an overlay showing the current branch's tool execution timeline.
 - Enhances `/tree` with timestamps, tool durations, compact tool-call summaries, and warnings for large tool results.
